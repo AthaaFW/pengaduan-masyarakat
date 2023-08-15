@@ -16,6 +16,7 @@ const Pengaduan = db.define('pengaduans',{
     nik: DataTypes.INTEGER,
     isi_laporan: DataTypes.TEXT,
     foto: DataTypes.STRING,
+    fotoName: DataTypes.STRING,
     status: DataTypes.STRING
 },{
     freezeTableName: true
