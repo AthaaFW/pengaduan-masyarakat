@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Tanggapan from "./TanggapanModal.js";
 
 const {DataTypes} = Sequelize;
 
@@ -16,8 +17,10 @@ const Petugas = db.define('petugas',{
     level: DataTypes.STRING
 })
 
+Petugas.hasMany(Tanggapan, {foreignKey: 'id_petugas'})
+
 export default Petugas;
 
 (async()=>{
-    await db.sync();
+    await db.sync({alter: true});
 })();

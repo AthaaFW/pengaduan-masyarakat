@@ -44,7 +44,8 @@ export const updatePetugas = async(req, res)=>{
     const level = req.body.level
 
     try {
-        await Petugas.update({nama_petugas: nama_petugas, username: username, password: password, telp: telp, level: level},{where:{id_petugas: req.params.id_petugas}})
+        await Petugas.update({nama_petugas: nama_petugas, username: username, password: password, telp: telp, level: level},
+            {where:{id_petugas: req.params.id_petugas}})
         res.status(201).json({msg:"Data berhasil diedit"})
     } catch (error) {
         console.log(error.message)
@@ -62,5 +63,3 @@ export const deletePetugas = async(req, res)=>{
         console.log(error.message)
     }
 }
-
-

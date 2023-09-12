@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Tanggapan from "./TanggapanModal.js";
 
 const {DataTypes} = Sequelize
 
@@ -22,8 +23,10 @@ const Pengaduan = db.define('pengaduans',{
     freezeTableName: true
 })
 
+Pengaduan.hasMany(Tanggapan, {foreignKey:'id_pengaduan'})
+
 export default Pengaduan;
 
 (async()=>{
-    await db.sync();
+    await db.sync({alter:true});
 })();

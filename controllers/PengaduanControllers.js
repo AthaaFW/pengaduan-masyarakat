@@ -1,7 +1,9 @@
 import Pengaduan from "../model/PengaduanModal.js";
+import Masyarakat from "../model/MasyarakatModal.js";
 import path from 'path';
 import fs from 'fs';
 import { where } from "sequelize";
+import Tanggapan from "../model/TanggapanModal.js";
 
 export const getPengaduan = async(req,res)=>{
     try {
@@ -41,7 +43,11 @@ export const getPengaduanById = async(req, res)=>{
         const pengaduan = await Pengaduan.findOne({
             where:{
                 id_pengaduan : req.params.id_pengaduan
-            }
+            },
+            include:{
+                model: Tanggapan,
+                attributes: ['tanggapan', 'id_petugas']
+            } 
         });
         res.json(pengaduan);
     } catch (error) {
@@ -85,5 +91,22 @@ export const deletePengaduan = async(req, res)=>{
         res.status(201).json({msg: "Pengaduan dibatalkan"});
     } catch (error) {
         console.log(error.message);
+    }
+}
+
+export const getPengaduanByMasyrakat = async(req, res)=>{
+    try {
+        const pengaduan = await Masyarakat.findAll({
+            where:{
+                nik: req.params.nik
+            },
+            include:{
+                model: Pengaduan,
+                attributes: ['nik', 'isi_laporan', 'foto', 'status']
+            }
+        })
+        res.json(pengaduan)
+    } catch (error) {
+        console.log(error.message)
     }
 }

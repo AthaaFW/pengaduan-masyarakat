@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Pengaduan from "./PengaduanModal.js";
 
 const {DataTypes} = Sequelize;
 
@@ -18,8 +19,9 @@ const Tanggapan = db.define('tangappan',{
     id_petugas: DataTypes.INTEGER
 })
 
+
 export default Tanggapan;
 
 (async()=>{
-    await db.sync();
+    await db.sync({alter: true});
 })();
